@@ -37,7 +37,45 @@ function speak()
     synth.speak(utterThis);
 }
 
+function check()
+{
+    img = document.getElementById("captured_image");
+    classifier.classify(img, gotResult);
+}
 
+function gotResult(error , result)
+{
+    if(error)
+    {
+        console.error(error);
+    }
+    else{
+        console.log(result);
+        document.getElementById("captured_image").innerHTML = result[0].label;
+        prediction = result[0].label;
+        speak();
+        if(result[0].label == "best")
+        {
+            document.getElementById("emoji").innerHTML = "&#128077;";
+        }
+        if(result[0].label == "victory")
+        {
+            document.getElementById("emoji").innerHTML = "&#9996";
+        }
+        if(result[0].label == "amazing")
+        {
+            document.getElementById("emoji").innerHTML = "&#128076;";
+        }
+        if(result[0].label == "bad")
+        {
+            document.getElementById("emoji").innerHTML = "&#128078;";
+        }
+        if(result[0].label == "yo")
+        {
+            document.getElementById("emoji").innerHTML = "&#129304;";
+        }
+    }
+}
 
 
 
